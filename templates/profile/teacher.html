@@ -1,0 +1,30 @@
+{% extends '../admin/base.html' %}
+
+{% block title %}Your Profile{% endblock %}
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block usertools %}
+	<p> Welcome {{ request.user.username }} / <a href="{% url 'logout' %}?next=/login">Log out</a> </p>
+{% endblock %}
+
+{% block content %}
+<div>
+	<h2> Your appointments : </h2>
+	{% for rdv in appointments %}
+	<ul>
+		<li> On : {{ rdv.date }} </li>
+		<li> Student : {{ rdv.student.student.username }} </li>
+		<li> Where : {{ rdv.place }} </li>
+	</ul>
+	{% endfor %}
+</div>
+<div>
+	<h2> List of the students : </h2>
+	{% for std in students %}
+	<ul>
+		<li><a href="{% url 'show' id=std.student.id %}"> {{ std.student.username }} </a></li>
+	</ul>
+	{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends '../admin/base.html' %}
+
+{% block title %} Student record {% endblock %}
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block usertools %}
+	<p> Welcome {{ request.user.username }} / <a href="{% url 'index' %}"> Your profile </a> / <a href="{% url 'logout' %}?next=/login">Log out</a> </p>
+{% endblock %}
+
+{% block content %}
+<h2> Student' personnal record </h2>
+<div>
+	<ul>
+		<li> Username : {{ user.username }} </li>
+		<li> Email : {{ user.email }} </li>
+		<li> Hours left : {{ user.paid_hours }} </li>
+	</ul>	
+</div>
+<div>
+	<h3> Your appointments with this student </h3>	
+	{% for rdv in appointments %}
+		<ul>
+			<li> On : {{ rdv.date }} </li>
+			<li> Where : {{ rdv.place }} </li>
+		</ul>	
+	{% endfor %}
+</div>	
+{% endblock %}
